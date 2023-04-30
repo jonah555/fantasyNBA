@@ -3,6 +3,10 @@ import { Route, Routes } from 'react-router-dom';
 
 import NavBar from './components/navbar';
 import Players from './components/players';
+import Teams from './components/teams';
+
+// temporary for use with JSON files
+import players from './data/players_list.json';
 
 const App = () => {
     return(
@@ -11,7 +15,8 @@ const App = () => {
             <h1>NBA Fantasy</h1>
             <Routes>
                 <Route exact path='/'></Route>
-                <Route path='/players' element={<Players />} />
+                <Route path='/players' element={<Players playerData={players}/>} />
+                <Route path='/teams' element={<Teams />} />
             </Routes>
         </div>
     );

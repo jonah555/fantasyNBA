@@ -1,9 +1,12 @@
 import React from 'react';
 
-const Players = () => {
+import PlayerList from './player-list';
+
+const Players = ({ playerData }) => {
     return (
         <div id='players-div'>
             <h2>Players</h2>
+            <PlayerList playerData={playerData}/>
         </div>
     );
 };
