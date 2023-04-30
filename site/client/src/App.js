@@ -7,6 +7,7 @@ import Teams from './components/teams';
 
 // temporary for use with JSON files
 import players from './data/players_list.json';
+import teams from './data/teams_list.json';
 
 const App = () => {
     return(
@@ -15,8 +16,8 @@ const App = () => {
             <h1>NBA Fantasy</h1>
             <Routes>
                 <Route exact path='/'></Route>
-                <Route path='/players' element={<Players playerData={players}/>} />
-                <Route path='/teams' element={<Teams />} />
+                <Route path='/players' element={<Players playerData={players} />} />
+                <Route path='/teams' element={<Teams teamData={teams} />} />
             </Routes>
         </div>
     );
