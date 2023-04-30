@@ -13,7 +13,7 @@ const App = () => {
     return(
         <div className='container'>
             <NavBar />
-            <h1>NBA Fantasy</h1>
+            <h1  className='display-4'>NBA Fantasy</h1>
             <Routes>
                 <Route exact path='/'></Route>
                 <Route path='/players' element={<Players playerData={players} />} />

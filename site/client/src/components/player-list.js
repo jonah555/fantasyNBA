@@ -29,7 +29,7 @@ class PlayerList extends Component{
         return(
             <div id='player-list-div'>
                 {this.state.focusedCard ? <Player toggle={this.toggleCard} /> : null}
-                {!this.state.focusedCard ? <table className='table'>
+                <table className='table' style={{filter: this.state.focusedCard ? 'blur(5px)' : 'none'}}>
                     <thead>
                         <tr>
                             <th scope='col'>#</th>
@@ -46,7 +46,7 @@ class PlayerList extends Component{
                             </tr>
                         })}
                     </tbody>
-                </table> : null}
+                </table>
             </div>
         )
     }

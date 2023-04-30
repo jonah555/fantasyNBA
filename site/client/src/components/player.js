@@ -11,10 +11,12 @@ class Player extends Component{
 
     render() {
         return(
-            <div className='player-card card'>
-                <div className='card-body'>
-                    <h5 className='card-title'>Player</h5>
-                    <button onClick={this.closeWindow}>Close</button>
+            <div className='player-card d-flex justify-content-center align-items-center container' onClick={this.closeWindow} style={{width: '100%', height: '80vh', position: 'fixed', zIndex: 1}}>    
+                <div className='card' onClick={(e) => e.stopPropagation()}>
+                    <div className='card-body'>
+                        <h5 className='card-title'>Player</h5>
+                        <button onClick={this.closeWindow}>Close</button>
+                    </div>
                 </div>
             </div>
         );

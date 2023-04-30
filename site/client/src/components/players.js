@@ -5,7 +5,7 @@ import PlayerList from './player-list';
 const Players = ({ playerData }) => {
     return (
         <div id='players-div'>
-            <h2>Players</h2>
+            <h2 className='display-5'>Players</h2>
             <PlayerList playerData={playerData}/>
         </div>
     );
