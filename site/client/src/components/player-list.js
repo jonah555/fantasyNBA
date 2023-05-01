@@ -11,14 +11,24 @@ class PlayerList extends Component{
     // }
 
     state = {
-        focusedCard: false
+        cardIsFocused: false
     };
+
+    selectCard = (e) => {
+        // console.log(e);
+        let target = e.target.parentNode;
+        let playerIdx = target.getAttribute('player-idx');
+        this.setState({
+            focusedCard: playerIdx
+        });
+        this.toggleCard();
+    }
 
     toggleCard = () => {
         this.setState({
-            focusedCard: !this.state.focusedCard
+            cardIsFocused: !this.state.cardIsFocused
         });
-        // alert(this.state.focusedCard);
+        // alert(this.state.cardIsFocused);
     };
 
     printTest = (row) => {
@@ -28,8 +38,8 @@ class PlayerList extends Component{
     render() {
         return(
             <div id='player-list-div'>
-                {this.state.focusedCard ? <Player toggle={this.toggleCard} /> : null}
-                <table className='table' style={{filter: this.state.focusedCard ? 'blur(5px)' : 'none'}}>
+                {this.state.cardIsFocused ? <Player toggle={this.toggleCard} playerIdx={this.state.focusedCard} playerData={this.props.playerData[this.state.focusedCard]} /> : null}
+                <table className='table' style={{filter: this.state.cardIsFocused ? 'blur(5px)' : 'none'}}>
                     <thead>
                         <tr>
                             <th scope='col'>#</th>
@@ -39,7 +49,7 @@ class PlayerList extends Component{
                     </thead>
                     <tbody>
                         {this.props.playerData.map((row, idx) => {
-                            return <tr key={idx} onClick={this.toggleCard}>
+                            return <tr player-idx={idx} key={idx} onClick={(e) => this.selectCard(e)}>
                                 <td>{Object.values(row)[0]}</td>
                                 <td>{Object.values(row)[1]}</td>
                                 <td>{Object.keys(Object.values(row)[2]).join(', ')}</td>
