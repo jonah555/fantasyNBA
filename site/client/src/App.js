@@ -13,7 +13,7 @@ import games from './data/games_list.json';
 
 const App = () => {
     return(
-        <div className='container'>
+        <div className='container-fluid'>
             <NavBar />
             <h1  className='display-4'>NBA Fantasy</h1>
             <Routes>
