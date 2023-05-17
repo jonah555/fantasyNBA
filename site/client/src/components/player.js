@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 class Player extends Component{
     constructor(props) {
         super(props);
-        this.state ={
+        this.state = {
             focusedCard: false,
             data: this.props.playerData.season,
-            focusedSeason: 2023,
+            focusedSeason: this.props.focusedSeason,
             seasons: []
         };
     }
@@ -31,7 +31,6 @@ class Player extends Component{
     }
 
     selectSeason = (e) => {
-        // console.log(e);
         let target = e.target;
         let seasonIdx = target.getAttribute('season-idx');
         this.setState({
@@ -49,7 +48,7 @@ class Player extends Component{
                             <h5 className='card-title'>{this.props.playerData.name}</h5>
                             <div className='dropdown'>
                                 <button className='btn btn-primary dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                                    Season
+                                    {this.state.focusedSeason}
                                 </button>
                                 <ul className='dropdown-menu'>
                                 {this.state.seasons.map((year) => {
@@ -66,7 +65,7 @@ class Player extends Component{
                                     <tr>
                                         <th>game</th>
                                         <th>game id</th>
-                                        {Object.keys(Object.values(this.state.data[Object.keys(this.state.data)[2]]['game log'])[0]).map((header) => {
+                                        {Object.keys(Object.values(this.state.data[this.state.focusedSeason]['game log'])[0]).map((header) => {
                                             return (
                                                 <th>{header}</th>
                                             )

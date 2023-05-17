@@ -7,7 +7,7 @@ import Teams from './components/teams';
 import Games from './components/games';
 
 // temporary for use with JSON files
-import players from './data/players_list.json';
+import players from './data/players_list_averages.json';
 import teams from './data/teams_list.json';
 import games from './data/games_list.json';
 
