@@ -12,6 +12,8 @@ class TradeComparison extends Component{
             p2Team: [],
             p1Stats: [],
             p2Stats: [],
+            isTrade: false,
+            statDelta: Array(BOXHEADERS.length),
             statCompare: Array(BOXHEADERS.length)
         };
     }
@@ -32,12 +34,14 @@ class TradeComparison extends Component{
         if (team === 1) {
             this.setState({
                 p1Team: [...this.state.p1Team, player],
-                p1Stats: [...this.state.p1Stats, player['averages']]
+                p1Stats: [...this.state.p1Stats, player['averages']],
+                isTrade: true
             });
         } else if (team === 2) {
             this.setState({
                 p2Team: [...this.state.p2Team, player],
-                p2Stats: [...this.state.p2Stats, player['averages']]
+                p2Stats: [...this.state.p2Stats, player['averages']],
+                isTrade: true
             });
         }
     }
@@ -70,11 +74,19 @@ class TradeComparison extends Component{
             }
         }
 
+        let statDelta = Array(BOXHEADERS.length)
         let statCompare = Array(BOXHEADERS.length);
+        
         for (let i = 0; i < BOXHEADERS.length; i++) {
-            if (p1Sum[i] > p2Sum[i]) {
+            if (i in [0, 1, 3]) {
+                statDelta[i] = 0;
+            } else {
+                statDelta[i] = p1Sum[i] - p2Sum[i];
+            }
+
+            if (statDelta[i] > 0) {
                 statCompare[i] = 1;
-            } else if (p1Sum[i] < p2Sum[i]) {
+            } else if (statDelta[i] < 0) {
                 statCompare[i] = 2;
             } else {
                 statCompare[i] = 0;
@@ -89,10 +101,9 @@ class TradeComparison extends Component{
         }
 
         this.setState({
+            statDelta: statDelta,
             statCompare: statCompare
         });
-
-        return 'abc';
     }
 
     getPlayerByIdx(idx) {
@@ -133,6 +144,8 @@ class TradeComparison extends Component{
             p2Team: [],
             p1Stats: [],
             p2Stats: [],
+            isTrade: false,
+            statDelta: Array(BOXHEADERS.length),
             statCompare: Array(BOXHEADERS.length)
         });
     }
@@ -216,6 +229,10 @@ class TradeComparison extends Component{
                                 <tbody>
                                     {this.state.p1Team.map((row, idx) => { return(this.renderPlayer(row, idx, 1)) })}
                                     {this.state.p2Team.map((row, idx) => { return(this.renderPlayer(row, idx, 2)) })}
+                                    {this.state.isTrade ? <tr id='trade-deltas'>
+                                        <th>Trade &Delta;</th>
+                                        {this.state.statDelta.map((row) => { return(<td>{row.toFixed(1)}</td>) })}
+                                    </tr> : null}
                                 </tbody>
                             </table>
                         </div>

@@ -15,3 +15,7 @@
 .team2-style {
     color: red;
 }
+
+#trade-deltas td, #trade-deltas th {
+    border-top: 2px solid gray;
+}
