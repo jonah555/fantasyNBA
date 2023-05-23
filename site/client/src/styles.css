@@ -2,3 +2,16 @@
     max-height: 60vh;
     overflow-y: auto;
 }
+
+#trade-comparison-div .scroll {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.team1-style {
+    color: green;
+}
+
+.team2-style {
+    color: red;
+}

@@ -10,6 +10,7 @@ const NavBar = () => {
                 <NavLink to='/players' className='nav-link px-2'>Players</NavLink>
                 <NavLink to='/teams' className='nav-link px-2'>Teams</NavLink>
                 <NavLink to='/games' className='nav-link px-2'>Games</NavLink>
+                <NavLink to='/trade' className='nav-link px-2'>Trade</NavLink>
             </nav>
         </div>
     );

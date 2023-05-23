@@ -31,13 +31,13 @@ def clean_averages(data):
     cleaned_data['FGM/FGA'] = f'{data[1]:.1f}/{data[2]:.1f}'
 
     # FG_PCT
-    cleaned_data['FG%'] = f'{data[3]:.3f}'
+    cleaned_data['FG%'] = f'{data[1]/data[2]:.3f}'
 
     # FTM/FTA
     cleaned_data['FTM/FTA'] = f'{data[7]:.1f}/{data[8]:.1f}'
 
     # FT_PCT
-    cleaned_data['FT%'] = f'{data[6]:.3f}'
+    cleaned_data['FT%'] = f'{data[7]/data[8]:.3f}'
 
     # 3PM
     cleaned_data['3PM'] = f'{data[4]:.1f}'
@@ -70,6 +70,7 @@ def main(filename):
         json_file = json.load(f)
     
     for player in json_file:
+        cum_avgs = []
         for year, data in player['season'].items():
             if data['game log']:
                 game_log = [list(game.values()) for game in data['game log'].values() if not None in game.values()]
@@ -79,10 +80,17 @@ def main(filename):
                 if game_log:
                     game_log = np.array(game_log)
                     game_avg = np.mean(game_log, axis=0)
+                    cum_avgs.append(game_avg)
                     game_avg = clean_averages(game_avg)
                 else:
-                    game_avg = [0.0]*len(BOX_HEADERS)
+                    game_avg = [0.0]*12
                 data['averages'] = game_avg
+        if cum_avgs:
+            cum_avg = np.mean(cum_avgs, axis=0)
+            cum_avg = clean_averages(cum_avg)
+        else:
+            cum_avg = [0.0]*12
+        player['averages'] = cum_avg
 
     new_filename = ''.join(filename.split('/')[-1].split('.')[:-1])
     with open(f'{new_filename}_averages.json', 'w') as f:

@@ -5,6 +5,7 @@ import NavBar from './components/navbar';
 import Players from './components/players';
 import Teams from './components/teams';
 import Games from './components/games';
+import TradeComparison from './components/trade-comparison';
 
 // temporary for use with JSON files
 import players from './data/players_list_averages.json';
@@ -21,6 +22,7 @@ const App = () => {
                 <Route path='/players' element={<Players playerData={players} />} />
                 <Route path='/teams' element={<Teams teamData={teams} />} />
                 <Route path='/games' element={<Games gameData={games} />} />
+                <Route path='/trade' element={<TradeComparison playerData={players} />} />
             </Routes>
         </div>
     );
